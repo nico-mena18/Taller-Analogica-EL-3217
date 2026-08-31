@@ -1,0 +1,387 @@
+\documentclass[11pt]{article}
+
+% ---------- Paquetes ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{circuitikz}
+\usetikzlibrary{positioning}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\captionsetup{justification=centering, font=it, labelfont={it,bf}}
+\captionsetup[figure]{name=Figure}
+\captionsetup[table]{name=Table}
+\usepackage{float}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Lab. 2 --- Linear Op-Amp Circuits}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\newcommand{\blank}[1]{\makebox[#1]{\hrulefill}}
+
+\begin{document}
+
+% =====================================================
+% PORTADA / DATOS DEL EQUIPO
+% =====================================================
+\begin{center}
+    {\LARGE \bfseries Lab. 2}\\[0.3em]
+    {\Large \itshape Linear Op-Amp Circuits}
+\end{center}
+
+\vspace{1em}
+
+\noindent Team No. \blank{2cm}
+
+\vspace{0.5em}
+
+\noindent Names:
+
+\begin{tabbing}
+\hspace{1cm} \= \blank{9cm} \hspace{0.3cm} \= I.D. \blank{2.5cm} \\[0.6em]
+\> \blank{9cm} \> I.D. \blank{2.5cm}
+\end{tabbing}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+% =====================================================
+% REFERENCIA Y LECTURA
+% =====================================================
+\subsection*{Reference:}
+Floyd Thomas L., Buchla David M.: \textit{Experiments in Analog Fundamentals, A System Approach}. Pearson Education, 2013.
+
+\subsection*{Reading:}
+Floyd and Buchla, \textit{Fundamentals: A Systems Approach}, Sections 6-4 through 6-6. Pearson Education, 2013.
+
+\subsection*{Objectives:}
+After performing this experiment, you will be able to:
+\begin{enumerate}[label=\arabic*.]
+    \item Construct and test inverting and noninverting amplifiers using op-amps.
+    \item Specify components for inverting and noninverting amplifiers using op-amps.
+\end{enumerate}
+
+\subsection*{Materials Needed:}
+\begin{itemize}
+    \item Resistors: two $1\,\text{k}\Omega$, one $10\,\text{k}\Omega$, one $470\,\text{k}\Omega$, one $1.0\,\text{M}\Omega$
+    \item Two $1.0\,\mu\text{F}$ capacitors
+    \item One 741C op-amp
+    \item \textit{For Further Investigation:}
+    \begin{itemize}
+        \item One $1.0\,\text{k}\Omega$ potentiometer, one $100\,\text{k}\Omega$ resistor, assorted resistors to test.
+    \end{itemize}
+\end{itemize}
+
+% =====================================================
+% SUMMARY OF THEORY
+% =====================================================
+\section*{Summary of Theory}
+
+One of the most important ideas in electronics incorporates the idea of \textit{feedback}, where a portion of the output is returned to the input. If the return signal tends to decrease the input amplitude, it is called \textit{negative feedback}. Negative feedback produces a number of desirable qualities in an amplifier, increasing its stability and its frequency response. It also allows the gain to be controlled independently of the device parameters, temperature, or other variables.
+
+Operational amplifiers are almost always used with external, negative feedback. The feedback circuit determines the specific characteristics of the amplifier. By itself, an op-amp has an extremely high voltage gain called the \textit{open-loop} gain, $A_{ol}$. When negative feedback is added, the overall gain of the amplifier is determined by the feedback circuit. This gain, including the feedback circuit, is called the \textit{closed-loop} gain, $A_{cl}$.
+
+Figure~\ref{fig:20-1} illustrates a noninverting amplifier with negative feedback. The input is applied to the noninverting terminal and a fraction ($B$) of the output is returned to the inverting input by the voltage divider. The very high gain of the amplifier forces the two inputs to be very nearly the same voltage; therefore, the input voltage is across $R_i$, and the output voltage is across $R_i + R_f$. The closed-loop gain of this noninverting amplifier is given as $A_{cl(NI)}$. The closed-loop gain is the reciprocal of the feedback fraction, as shown in Figure~\ref{fig:20-1}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{figs/image1.jpeg}
+\caption{Noninverting amplifier}
+\label{fig:20-1}
+\end{figure}
+
+\begin{align*}
+\text{feedback fraction} = B = \dfrac{R_i}{R_i + R_f}
+\end{align*}
+
+\begin{align*}
+A_{cl(NI)} = \dfrac{1}{B} = \dfrac{R_i + R_f}{R_i} = 1 + \dfrac{R_f}{R_i}
+\end{align*}
+
+An inverting amplifier is shown in Figure~\ref{fig:20-2}. In this amplifier, the output voltage is the opposite phase to the input voltage. The noninverting input is grounded, and the input signal is applied through a resistor to the inverting terminal. A feedback resistor is connected between the output and the inverting input. This amplifier can be analyzed by assuming the input current is the same as the current in the feedback resistor, $I_{in} = I_f$, and that the open-loop gain of the amplifier is very high. From these assumptions, the closed-loop gain can be calculated quite accurately as the ratio of the feedback resistor to the input resistor. The basic equations for the inverting amplifier are shown with Figure~\ref{fig:20-2}. The minus sign indicates inversion between the input and output. $(-)$ refers to the inverting input on the op-amp.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.65\textwidth]{figs/image2.jpeg}
+\caption{Inverting amplifier}
+\label{fig:20-2}
+\end{figure}
+
+\begin{align*}
+I_{in} = I_f
+\end{align*}
+
+$A_{ol}$ is very large, therefore
+\begin{align*}
+V(-) = -\dfrac{V_{out}}{A_{ol}} \cong 0
+\end{align*}
+
+\begin{align*}
+\dfrac{V_{in}}{R_i} = -\dfrac{V_{out}}{R_f}
+\end{align*}
+
+\begin{align*}
+A_{cl(I)} = \dfrac{V_{out}}{V_{in}} = -\dfrac{R_f}{R_i}
+\end{align*}
+
+\newpage
+% =====================================================
+% PROCEDURE
+% =====================================================
+\section*{Procedure}
+
+\begin{enumerate}[label=\arabic*.]
+    \item The circuit to be tested in this step is the noninverting amplifier illustrated in Figure~\ref{fig:20-3}.
+    \begin{enumerate}[label=\alph*.]
+        \item Measure a $10\,\text{k}\Omega$ resistor for $R_f$ and $1.0\,\text{k}\Omega$ resistor for $R_i$. Record the measured value of resistance in Table~\ref{tab:20-1}.
+        \item Using the measured resistances, compute the closed-loop gain of the noninverting amplifier. The closed-loop gain equation is given next to Figure~\ref{fig:20-1}.
+        \item Calculate $V_{out}$ using the computed closed-loop gain.
+        \item Connect the circuit shown in Figure~\ref{fig:20-3}. Set the signal generator for a $500\,\text{mV}_{pp}$ sinusoidal wave at $1.0\,\text{kHz}$. The generator should have no dc offset.
+        \item Measure the output voltage, $V_{out}$. Record the measured value.
+        \item Measure the feedback voltage at pin 2. Record the measured value.
+        \item Place a $1.0\,\text{M}\Omega$ test resistor in series with the generator. Measure the input resistance of the circuit, $R_{in}$, based on the voltage drop across the test resistor. Use the voltage divider rule to indirectly find the input resistance.
+    \end{enumerate}
+\end{enumerate}
+
+\begin{table}[h!]
+\centering
+\caption{Noninverting amplifier measurements}
+\label{tab:20-1}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$R_f$ & $R_i$ & $V_{in}$ & $A_{cl(NI)}$ & $V_{out}$ & $V_{out}$ & $V(-)$ & $R_{in}$ \\
+Measured & Measured & Measured & Computed & Computed (pin 6) & Measured (pin 6) & Measured (pin 2) & Measured \\
+\hline
+ $10$ k$\Omega$& $1$ k$\Omega$ & $500\,\text{mV}_{pp}$ & $11$ & $5.5$ Vpp & $5.066$ Vpp & $452.267$ mV  & - \\[1.2em]
+\hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.55\textwidth]{figs/fig20-3.jpeg}
+\caption{Noninverting amplifier test circuit (741C, $R_f = 10\,\text{k}\Omega$, $R_i = 1.0\,\text{k}\Omega$)}
+\label{fig:20-3}
+\end{figure}
+
+\newpage
+
+\begin{enumerate}[resume, label=\arabic*.]
+    \item In this step you will test an inverting amplifier. All data are to be recorded in Table~\ref{tab:20-2}. The circuit is illustrated in Figure~\ref{fig:20-4}. The closed-loop gain is:
+    \begin{align*}
+    A_{cl(I)} = -\dfrac{R_f}{R_i}
+    \end{align*}
+    \begin{enumerate}[label=\alph*.]
+        \item Use the same resistors for $R_f$ and $R_i$ as in step 1. Record the measured value of resistance in Table~\ref{tab:20-2}.
+        \item Using the measured resistance, compute and record the closed-loop gain of the inverting amplifier.
+        \item Calculate the $V_{out}$ using the computed closed-loop gain.
+        \item Connect the circuit shown in Figure~\ref{fig:20-4}. Set the signal generator for the $500\,\text{mV}_{pp}$ sine wave at $1\,\text{kHz}$. The generator should have no dc offset.
+        \item Measure and record the output voltage, $V_{out}$.
+        \item Measure and record the output voltage at pin 2. This point is called a \textit{virtual ground} because of the effect of negative feedback.
+        \item Place a $1.0\,\text{k}\Omega$ test resistor in series with the generator and $R_i$. Measure the input resistance of the circuit, $R_{in}$, based on the voltage drop across the test resistor. In this case, you should observe that the drop across the test resistor is about the same as the drop across $R_i$.
+    \end{enumerate}
+\end{enumerate}
+
+\begin{table}[h!]
+\centering
+\caption{Inverting amplifier measurements}
+\label{tab:20-2}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$R_f$ & $R_i$ & $V_{in}$ & $A_{cl(NI)}$ & $V_{out}$ & $V_{out}$ & $V(-)$ & $R_{in}$ \\
+Measured & Measured & Measured & Computed & Computed (pin 6) & Measured (pin 6) & Measured (pin 2) & Measured \\
+\hline
+ 10 \text{ k}$\Omega$ & $1\text{ k}\Omega$ & $500\,\text{mV}_{pp}$ & $-10$ & $5$ V & $5$ V & $4.71$ mV & - \\[1.2em]
+\hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.55\textwidth]{figs/fig20-4.jpeg}
+\caption{Inverting amplifier test circuit (741C, $R_f = 10\,\text{k}\Omega$, $R_i = 1.0\,\text{k}\Omega$)}
+\label{fig:20-4}
+\end{figure}
+
+\newpage
+
+\begin{enumerate}[resume, label=\arabic*.]
+    \item In this step you will specify the components for an inverting amplifier using a 741C Op-Amp. The amplifier is required to have an input resistance of $10\,\text{k}\Omega$ and a closed-loop gain of $-47$. The input test signal is a $1\,\text{kHz}$, $100\,\text{mV}_{pp}$ sinusoidal wave signal with no dc component (offset). Check that there is no dc component using an oscilloscope. If necessary, you may need to put a voltage divider on the input to attenuate the signal to the $100\,\text{mV}$ level.
+
+    Draw the amplifier. Then build and test your circuit.
+
+    \textit{Note}: You need to be careful that the generator does not have a dc offset: remember this is a dc amplifier!
+
+    Find the maximum voltage the input signal can have before clipping occurs. Try increasing the frequency and note the frequency at which the output is distorted. Does the upper frequency response depend on the amplitude of the waveform? Summarize your results in the space provided.
+\end{enumerate}
+
+A continuación se detalla el proceso de simulación de esta sección:
+
+Primero se calcula el valor de $R_f$ mediante una simple ecuación:
+
+\begin{align*}
+	A_{cl} &= - \frac{R_f}{R_i}\\
+	47 &=  \frac{R_f}{10 \text{ k}\Omega}\\
+	R_f &=  470\text{ k}\Omega\\
+\end{align*}
+
+Ahora para calcular en que punto el amplificador se satura basta con hacer la siguiente ecuación:
+\begin{align*}
+	&15\text{ V} = -47 \cdot V_{in_{max}}\\
+	&V_{in_{max}} = 320\text{ mV}\\
+\end{align*}
+
+Este comportamiento se evidencia en las siguientes capturas:
+
+\begin{figure} [h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"figs/Captura desde 2026-08-30 21-28-20"}
+	\caption{Vin de $100$ mVpp }
+	\label{fig:captura-desde-2026-08-30-21-28-20}
+\end{figure}
+
+
+\begin{figure} [h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"figs/Captura desde 2026-08-30 21-35-48"}
+	\caption{Vin de $300$ mVpp}
+	\label{fig:captura-desde-2026-08-30-21-35-48}
+\end{figure}
+
+\begin{figure} [h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"figs/Captura desde 2026-08-30 21-36-46"}
+	\caption{Vin de $640$ mVpp}
+	\label{fig:64mvpp}
+\end{figure}
+
+En la figura \ref{fig:64mvpp} se observa como la señal de salida se empieza a recortar, ya que supera los $15$ V.
+
+\newpage
+En cuanto a las simulaciones de respuesta en frecuencia se utilizó un barrido AC para comprobar el comportamiento del circuito a medida que se aumentaba la frecuencia de la señal de entrega. El resultado de esta simulación se muestra en la figura \ref{fig:Respuesta_frecuencia}.
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{"figs/Captura desde 2026-08-30 22-03-24"}
+	\caption{Respuesta en frecuencia del amplificador Inversor}
+	\label{fig:Respuesta_frecuencia}
+\end{figure}
+
+En dicha imagen se observa el punto exacto en donde el circuito deja de realizar su función de amplificación, mostrando claramente la frecuencia de corte ($f_c = 21\text{ kHz}$). Sin embargo, la señal no se distorsiona con la frecuencia, sino que se atenuá. 
+Para determinar la dependencia de la frecuencia y la magnitud, se probaron valores de $V_{in}$ y $f$ hasta alcanzar una distorsión. En este caso se logro al aumentar la tensión a $200$ mVp y con una frecuencia de $40$ kHz, este resultado se observa en la figura \ref{fig:distorsionmagfrecuencia}.
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figs/distorsion_mag_frecuencia}
+	\caption{Distorsión de la señal}
+	\label{fig:distorsionmagfrecuencia}
+\end{figure}
+
+
+
+\vspace{6cm}
+
+\newpage
+% =====================================================
+% CONCLUSION
+% =====================================================
+\section*{Conclusion}
+
+\vspace{9cm}
+
+\newpage
+% =====================================================
+% EVALUATION AND REVIEW QUESTIONS
+% =====================================================
+\section*{Evaluation and Review Questions}
+
+\begin{enumerate}[label=\arabic*.]
+    \item Express the gain of the amplifiers tested in steps 1 and 2 in dB.
+    
+    \[A_{cl(NI)} = 20 log(11) = 20.8\text{ dB}\]
+    \[A_{cl(I)} = 20 log(10)  = 20\text{ dB}\]
+
+    \vspace{2.5cm}
+
+    \item It was correct to talk about a virtual ground for the inverting amplifier. Why isn't it correct to refer to a virtual ground for the noninverting amplifier?
+    
+    Debido a la configuración de No inversor la terminal negativa no está conectada a tierra.
+
+    \vspace{2.5cm}
+
+    \item If $R_f = R_i = 10\,\text{k}\Omega$, what gain would you expect for:
+    \begin{enumerate}[label=\alph*.]
+        \item A noninverting amplifier?
+        \[A_{cl(NI)}= 1 + \frac{10 \text{ k}\Omega}{10 \text{ k}\Omega} = 2\]
+        \item An inverting amplifier?
+        \[A_{cl(I)}= \frac{-R_f}{R_i} = -1\]
+    \end{enumerate}
+
+    \vspace{2.5cm}
+
+    \item For the noninverting amplifier in Figure 20-3:
+    \begin{enumerate}[label=\alph*.]
+        \item If $R_f = 0$ and $R_i$ is infinite, what is the gain?\\
+        Si se realizan dichos cambios, la ganancia sería 1.
+        \[A_{cl(NI)} = 1 + \frac{0}{\infty} = 1\]
+
+        \vspace{1cm}
+
+        \item What is this type of amplifier called?\\
+        Corresponde a un seguidor de voltaje.
+    \end{enumerate}
+
+    \vspace{2cm}
+
+    \item What output would you expect in the inverting amplifier of Figure 20-4 if $R_f$ were open?\\
+    La salida se recortaría, ya que la señal se amplificaría en un factor de $A_{ol}$ el cual suele ser muy alto, provocando que el amplificador se sature. La señal de salida se vería con varios recorte en los picos y valles, pareciendo una onda cuadrada.
+
+    \vspace{2.5cm}
+\end{enumerate}
+
+\newpage
+% =====================================================
+% FOR FURTHER INVESTIGATION
+% =====================================================
+\section*{For Further Investigation}
+
+An interesting application of an inverting amplifier is to use it as the basis of an ohmmeter for high value resistors. The circuit is shown in Figure~\ref{fig:20-5}. The unknown resistor, labeled $R_x$, is placed between the terminals. The output voltage is proportional to the unknown resistance.
+
+Calibrate the meter by placing a known $10\,\text{k}\Omega$ resistor in place of $R_x$ and adjusting the potentiometer for exactly $100\,\text{mV}$ output. The output then represents $10\,\text{mV}/1000\,\Omega$. By reading the output voltage, and moving the decimal point, you can directly read resistors from several thousand ohms to over $1\,\text{M}\Omega$.
+
+Construct the circuit and test it using different resistors. Calibrate output voltage against resistance and compare with theory. Find the percent error for a $1\,\text{M}\Omega$ resistor using a lab meter as a standard.
+
+Summarize your results in a short report.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\textwidth]{figs/image4.jpeg}
+\caption{Ohmmeter circuit based on the inverting amplifier}
+\label{fig:20-5}
+\end{figure}
+
+\end{document}
