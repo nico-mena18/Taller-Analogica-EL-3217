@@ -398,6 +398,14 @@ El resistor bajo prueba se midió primero con el multímetro de laboratorio, que
 \%\,\text{error} &= 46.9\,\%
 \end{align*}
 
-El error es grande y además es un factor casi constante, la lectura sale $1.469$ veces el valor patrón. Un corrimiento de escala parejo como ese apunta al punto de calibración, porque si el potenciómetro no quedó exactamente en los $100\,\text{mV}$ con el resistor de $10\,\text{k}\Omega$, todas las lecturas se desplazan en la misma proporción. Lo otro que conviene revisar es que $14.63\,\text{V}$ está muy cerca de la alimentación de $15\,\text{V}$, ya en el límite de excursión de salida del 741C, donde la tensión deja de seguir de forma lineal a $R_x$.
+El error es grande y además es un factor casi constante, la lectura sale $1.469$ veces el valor patrón. El origen está en la calibración, ya que el montaje se hizo con un potenciómetro de $10\,\text{k}\Omega$ y el enunciado pide uno de $1.0\,\text{k}\Omega$. Devolviendo la cuenta desde la salida medida se obtiene la tensión de entrada con la que realmente se trabajó.
+
+\begin{align*}
+V_{in} = \frac{V_{out}\,R_i}{R_x} = \frac{14.63\,\text{V} \times 1\,\text{k}\Omega}{995.9\,\text{k}\Omega} = 14.69\,\text{mV}
+\end{align*}
+
+Son $14.69\,\text{mV}$ en lugar de los $10\,\text{mV}$ que corresponden a la escala de $10\,\text{mV}/1000\,\Omega$, y esa razón de $1.469$ es justo el $46.9\,\%$ de error que dio la lectura. El potenciómetro más grande hace muy difícil acertarle al punto de ajuste. Con el de $1.0\,\text{k}\Omega$ la tensión de entrada recorre de $0$ a $148\,\text{mV}$ y los $10\,\text{mV}$ de la calibración caen cerca del $7\,\%$ del recorrido del cursor, mientras que con el de $10\,\text{k}\Omega$ el rango sube hasta $1.36\,\text{V}$ y esos mismos $10\,\text{mV}$ quedan por debajo del $1\,\%$, donde un movimiento mínimo corre toda la escala.
+
+Vale agregar que a $14.63\,\text{V}$ la salida ya queda cerca del límite de excursión del 741C, así que con esa calibración un resistor apenas mayor se habría recortado. Repitiendo la medición con el potenciómetro de $1.0\,\text{k}\Omega$, la lectura para este $R_x$ tendría que quedar alrededor de los $9.96\,\text{V}$ esperados.
 
 \end{document}
