@@ -50,19 +50,20 @@
 
 \vspace{1em}
 
-\noindent Team No. \blank{2cm}
+\noindent Team No. 2
 
 \vspace{0.5em}
 
 \noindent Names:
 
+
 \begin{tabbing}
-\hspace{1cm} \= \blank{9cm} \hspace{0.3cm} \= I.D. \blank{2.5cm} \\[0.6em]
-\> \blank{9cm} \> I.D. \blank{2.5cm}
+\hspace{1cm} \= Jefferson Chinchilla Quesada \hspace{0.3cm} \= 2023152266  \\[0.6cm]
+\> Mattio Coghi Quirós \> 2023 \\[0.6cm]
+\> Nicolás Mena Valerio \> 2022
 \end{tabbing}
 
 \vspace{1em}
-\hrule
 \vspace{1em}
 
 % =====================================================
@@ -173,10 +174,10 @@ A_{cl(I)} = \dfrac{V_{out}}{V_{in}} = -\dfrac{R_f}{R_i}
 $R_f$ & $R_i$ & $V_{in}$ & $A_{cl(NI)}$ & $V_{out}$ & $V_{out}$ & $V(-)$ & $R_{in}$ \\
 Measured & Measured & Measured & Computed & Computed (pin 6) & Measured (pin 6) & Measured (pin 2) & Measured \\
 \hline
- $10$ k$\Omega$& $1$ k$\Omega$ & $500\,\text{mV}_{pp}$ & $11$ & $5.5$ Vpp & $5.066$ Vpp & $452.267$ mV  & - \\[1.2em]
+ $10$ k$\Omega$& $1$ k$\Omega$ & $500\,\text{mV}_{pp}$ & $11$ & $5.5$ Vpp & $5.56$ Vpp & $556$ mV  & $69.2$ mVrms \\[1.2em]
 \hline
 \end{tabular}%
-}
+}	
 \end{table}
 
 \begin{figure}[h!]
@@ -214,7 +215,7 @@ Measured & Measured & Measured & Computed & Computed (pin 6) & Measured (pin 6) 
 $R_f$ & $R_i$ & $V_{in}$ & $A_{cl(NI)}$ & $V_{out}$ & $V_{out}$ & $V(-)$ & $R_{in}$ \\
 Measured & Measured & Measured & Computed & Computed (pin 6) & Measured (pin 6) & Measured (pin 2) & Measured \\
 \hline
- 10 \text{ k}$\Omega$ & $1\text{ k}\Omega$ & $500\,\text{mV}_{pp}$ & $-10$ & $5$ V & $5$ V & $4.71$ mV & - \\[1.2em]
+ 10 \text{ k}$\Omega$ & $1\text{ k}\Omega$ & $50\,\text{mV}_{pp}$ & $-10$ & $5$ V & $4.48$ V & $4.39$ mV & $87.29$ V \\[1.2em]
 \hline
 \end{tabular}%
 }
@@ -292,7 +293,9 @@ En cuanto a las simulaciones de respuesta en frecuencia se utilizó un barrido A
 \end{figure}
 
 En dicha imagen se observa el punto exacto en donde el circuito deja de realizar su función de amplificación, mostrando claramente la frecuencia de corte ($f_c = 21\text{ kHz}$). Sin embargo, la señal no se distorsiona con la frecuencia, sino que se atenuá. 
-Para determinar la dependencia de la frecuencia y la magnitud, se probaron valores de $V_{in}$ y $f$ hasta alcanzar una distorsión. En este caso se logro al aumentar la tensión a $200$ mVp y con una frecuencia de $40$ kHz, este resultado se observa en la figura \ref{fig:distorsionmagfrecuencia}.
+Para determinar la dependencia de la frecuencia y la magnitud, se probaron valores de $V_{in}$ y $f$ hasta alcanzar una distorsión. En este caso se logro al aumentar la tensión a $600$ mVp y con una frecuencia de $40$ kHz, este resultado se observa en la figura \ref{fig:distorsionmagfrecuencia}. 
+
+%Insertar imagen del osciloscopio
 
 \begin{figure} [H]
 	\centering
