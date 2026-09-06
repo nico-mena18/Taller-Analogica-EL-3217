@@ -21,3 +21,5 @@
 *.run.xml
 *.synctex
 *.thm
+*.fdb_latexmk
+*.fls
