@@ -1,5 +1,7 @@
 INFORME = Lab2_Linear_OA_Circuits
 
+all: pdf
+
 pdf:
 	latexmk -pdf -interaction=nonstopmode -halt-on-error $(INFORME).tex
 
@@ -9,4 +11,4 @@ ver: pdf
 limpiar:
 	latexmk -c
 
-.PHONY: pdf ver limpiar
+.PHONY: all pdf ver limpiar
