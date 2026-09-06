@@ -387,4 +387,17 @@ Summarize your results in a short report.
 \label{fig:20-5}
 \end{figure}
 
+A continuación se resumen los resultados de esta sección.
+
+Con la calibración que pide el enunciado, $100\,\text{mV}$ de salida para un $R_x$ conocido de $10\,\text{k}\Omega$, la escala del óhmetro queda en $10\,\text{mV}$ por cada $1000\,\Omega$. Bajo esa escala un resistor de $1\,\text{M}\Omega$ tendría que dar $10\,\text{V}$ a la salida.
+
+El resistor bajo prueba se midió primero con el multímetro de laboratorio, que se toma como patrón, y dio $R_x = 0.9959\,\text{M}\Omega$. Con ese mismo resistor conectado entre las terminales, la salida del circuito fue de $V_{out} = 14.63\,\text{V}$, que llevada a resistencia con la escala calibrada equivale a una lectura de $1.463\,\text{M}\Omega$.
+
+\begin{align*}
+\%\,\text{error} &= \frac{1.463\,\text{M}\Omega - 0.9959\,\text{M}\Omega}{0.9959\,\text{M}\Omega} \times 100\\
+\%\,\text{error} &= 46.9\,\%
+\end{align*}
+
+El error es grande y además es un factor casi constante, la lectura sale $1.469$ veces el valor patrón. Un corrimiento de escala parejo como ese apunta al punto de calibración, porque si el potenciómetro no quedó exactamente en los $100\,\text{mV}$ con el resistor de $10\,\text{k}\Omega$, todas las lecturas se desplazan en la misma proporción. Lo otro que conviene revisar es que $14.63\,\text{V}$ está muy cerca de la alimentación de $15\,\text{V}$, ya en el límite de excursión de salida del 741C, donde la tensión deja de seguir de forma lineal a $R_x$.
+
 \end{document}
