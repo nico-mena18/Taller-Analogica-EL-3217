@@ -174,7 +174,7 @@ A_{cl(I)} = \dfrac{V_{out}}{V_{in}} = -\dfrac{R_f}{R_i}
 $R_f$ & $R_i$ & $V_{in}$ & $A_{cl(NI)}$ & $V_{out}$ & $V_{out}$ & $V(-)$ & $R_{in}$ \\
 Measured & Measured & Measured & Computed & Computed (pin 6) & Measured (pin 6) & Measured (pin 2) & Measured \\
 \hline
- $10$ k$\Omega$& $1$ k$\Omega$ & $500\,\text{mV}_{pp}$ & $11$ & $5.5$ Vpp & $5.56$ Vpp & $556$ mV  & $69.2$ mVrms \\[1.2em]
+ $10$ k$\Omega$& $1$ k$\Omega$ & $500\,\text{mV}_{pp}$ & $11$ & $5.5$ Vpp & $5.56$ Vpp & $556$ mV  & $654$ k$\Omega$ \\[1.2em]
 \hline
 \end{tabular}%
 }	
@@ -186,6 +186,15 @@ Measured & Measured & Measured & Computed & Computed (pin 6) & Measured (pin 6) 
 \caption{Noninverting amplifier test circuit (741C, $R_f = 10\,\text{k}\Omega$, $R_i = 1.0\,\text{k}\Omega$)}
 \label{fig:20-3}
 \end{figure}
+
+El $R_{in}$ de la tabla se obtiene con la regla del divisor de tensión. El generador de $500\,\text{mV}_{pp}$ equivale a $176.8\,\text{mV}_{rms}$ y en la entrada del amplificador se midieron $69.91\,\text{mV}_{rms}$, así que sobre el resistor de prueba de $1.0\,\text{M}\Omega$ caen los $106.87\,\text{mV}_{rms}$ restantes.
+
+\begin{align*}
+R_{in} = R_{prueba}\,\frac{V_{R_{in}}}{V_s - V_{R_{in}}} = 1\,\text{M}\Omega \cdot \frac{69.91\,\text{mV}}{106.87\,\text{mV}} = 654\,\text{k}\Omega
+\end{align*}
+
+Este valor queda muy por debajo de lo que predice la teoría, porque la realimentación negativa multiplica la resistencia de entrada del 741C por $(1 + A_{ol}B)$ y la lleva al orden de los $\text{G}\Omega$. Lo que limita la medición es la carga del instrumento, la punta del osciloscopio y el camino de corriente de polarización quedan en paralelo con la entrada y son del orden de los $\text{M}\Omega$, de modo que el divisor termina midiendo esa combinación.
+
 
 \newpage
 
@@ -215,7 +224,7 @@ Measured & Measured & Measured & Computed & Computed (pin 6) & Measured (pin 6) 
 $R_f$ & $R_i$ & $V_{in}$ & $A_{cl(NI)}$ & $V_{out}$ & $V_{out}$ & $V(-)$ & $R_{in}$ \\
 Measured & Measured & Measured & Computed & Computed (pin 6) & Measured (pin 6) & Measured (pin 2) & Measured \\
 \hline
- 10 \text{ k}$\Omega$ & $1\text{ k}\Omega$ & $50\,\text{mV}_{pp}$ & $-10$ & $5$ V & $4.48$ V & $4.39$ mV & $87.29$ V \\[1.2em]
+ 10 \text{ k}$\Omega$ & $1\text{ k}\Omega$ & $50\,\text{mV}_{pp}$ & $-10$ & $5$ V & $4.48$ V & $4.39$ mV & $976\ \Omega$ \\[1.2em]
 \hline
 \end{tabular}%
 }
@@ -227,6 +236,15 @@ Measured & Measured & Measured & Computed & Computed (pin 6) & Measured (pin 6) 
 \caption{Inverting amplifier test circuit (741C, $R_f = 10\,\text{k}\Omega$, $R_i = 1.0\,\text{k}\Omega$)}
 \label{fig:20-4}
 \end{figure}
+
+Acá el resistor de prueba es de $1.0\,\text{k}\Omega$ y el nodo de entrada quedó en $87.29\,\text{mV}_{rms}$, prácticamente la mitad de los $176.8\,\text{mV}_{rms}$ del generador, tal como anticipa el enunciado.
+
+\begin{align*}
+R_{in} = 1\,\text{k}\Omega \cdot \frac{87.29\,\text{mV}}{176.78\,\text{mV} - 87.29\,\text{mV}} = 976\,\Omega
+\end{align*}
+
+El resultado cae a un $1.4\,\%$ del $R_i$ medido de $0.9897\,\text{k}\Omega$. Tiene sentido, en el amplificador inversor la señal entra por $R_i$ contra la tierra virtual del pin 2, así que la resistencia de entrada del circuito queda fijada por ese resistor.
+
 
 \newpage
 
