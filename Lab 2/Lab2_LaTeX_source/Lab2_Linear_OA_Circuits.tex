@@ -59,8 +59,8 @@
 
 \begin{tabbing}
 \hspace{1cm} \= Jefferson Chinchilla Quesada \hspace{0.3cm} \= 2023152266  \\[0.6cm]
-\> Mattio Coghi Quirós \> 2023 \\[0.6cm]
-\> Nicolás Mena Valerio \> 2022
+\> Mattio Coghi Quirós \> 2023056023 \\[0.6cm]
+\> Nicolás Mena Valerio \> 2022327473
 \end{tabbing}
 
 \vspace{1em}
@@ -196,6 +196,16 @@ R_{in} = R_{prueba}\,\frac{V_{R_{in}}}{V_s - V_{R_{in}}} = 1\,\text{M}\Omega \cd
 Este valor queda muy por debajo de lo que predice la teoría, porque la realimentación negativa multiplica la resistencia de entrada del 741C por $(1 + A_{ol}B)$ y la lleva al orden de los $\text{G}\Omega$. Lo que limita la medición es la carga del instrumento, la punta del osciloscopio y el camino de corriente de polarización quedan en paralelo con la entrada y son del orden de los $\text{M}\Omega$, de modo que el divisor termina midiendo esa combinación.
 
 
+Como demuestra la señal de salida $V_{out}$ en la figura \ref{fig:fig1} se observa el efecto de amplificación $Av$ = 11.
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figs/DS0001}
+	\caption{Señal de salida $V_{out}$ amplificada}
+	\label{fig:fig1}
+\end{figure}
+
+
 \newpage
 
 \begin{enumerate}[resume, label=\arabic*.]
@@ -244,6 +254,15 @@ R_{in} = 1\,\text{k}\Omega \cdot \frac{87.29\,\text{mV}}{176.78\,\text{mV} - 87.
 \end{align*}
 
 El resultado cae a un $1.4\,\%$ del $R_i$ medido de $0.9897\,\text{k}\Omega$. Tiene sentido, en el amplificador inversor la señal entra por $R_i$ contra la tierra virtual del pin 2, así que la resistencia de entrada del circuito queda fijada por ese resistor.
+
+En la figura \ref{fig:fig2} se observa la señal de salida $V_{out}$ en modo de retroalimentación negativa, donde se ve claramente que la amplificación respeta la relación $R_f / R_i$, que al ser iguales da un valor de 1. 
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figs/DS0002}
+	\caption{Señal de salida $V_{out}$}
+	\label{fig:fig2}
+\end{figure}
 
 
 \newpage
@@ -311,7 +330,9 @@ En cuanto a las simulaciones de respuesta en frecuencia se utilizó un barrido A
 \end{figure}
 
 En dicha imagen se observa el punto exacto en donde el circuito deja de realizar su función de amplificación, mostrando claramente la frecuencia de corte ($f_c = 21\text{ kHz}$). Sin embargo, la señal no se distorsiona con la frecuencia, sino que se atenuá. 
-Para determinar la dependencia de la frecuencia y la magnitud, se probaron valores de $V_{in}$ y $f$ hasta alcanzar una distorsión. En este caso se logro al aumentar la tensión a $600$ mVp y con una frecuencia de $40$ kHz, este resultado se observa en la figura \ref{fig:distorsionmagfrecuencia}. 
+Para determinar la dependencia de la frecuencia y la magnitud, se probaron valores de $V_{in}$ y $f$ hasta alcanzar una distorsión. En este caso se logro al aumentar la tensión a $600$ mVp y con una frecuencia de $40$ kHz, este resultado se observa en la figura \ref{fig:distorsionmagfrecuencia}.\\
+
+Por otro lado, en la medición de laboratorio se demostró que la distorsión ocurrió con una tensión de  $600$ mVp y una frecuencia de $60$ Khz como lo muestra la imagen \ref{fig:distor}
 
 %Insertar imagen del osciloscopio
 
@@ -322,6 +343,12 @@ Para determinar la dependencia de la frecuencia y la magnitud, se probaron valor
 	\label{fig:distorsionmagfrecuencia}
 \end{figure}
 
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figs/DS0004}
+	\caption{Distorsión de la señal}
+	\label{fig:distor}
+\end{figure}
 
 
 \vspace{6cm}
@@ -331,6 +358,10 @@ Para determinar la dependencia de la frecuencia y la magnitud, se probaron valor
 % CONCLUSION
 % =====================================================
 \section*{Conclusion}
+
+De acuerdo con los circuitos simulados y probados en laboratorio, se confirma la estrecha relación entre la teoría y la práctica en el uso de amplificadores operacionales en configuraciones inversora y no inversora. Se logró observar el efecto de amplificación en la señal de salida, el cual responde directamente a la relación de las resistencias y a la topología elegida para la entrada de tensión. A su vez, se comprobó el comportamiento de las resistencias de entrada ($R_{in}$) en ambos circuitos: en el inversor esta depende del valor de $R_i$, mientras que en el no inversor es teóricamente muy alta, aunque en la práctica se vio limitada por el efecto de carga de los instrumentos de medición.
+
+Por otro lado, al evaluar los límites del OPAMP 741C, se documentó cómo la señal de salida se recorta al alcanzar los voltajes de saturación de la fuente. Además, al superar la frecuencia de corte (aproximadamente a los 21 kHz) y al combinar el aumento de frecuencia con un aumento en la amplitud de la señal de entrada, la onda se atenúa y se deforma, adquiriendo una forma triangular con cierto nivel de offset. Finalmente, la aplicación del OPAMP como óhmetro demostró la alta sensibilidad del circuito, donde la precisión de los componentes (como el potenciómetro) es crítica para lograr una calibración correcta y evitar márgenes de error elevados.
 
 \vspace{9cm}
 
