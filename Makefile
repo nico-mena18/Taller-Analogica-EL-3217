@@ -1,4 +1,6 @@
-all ver limpiar:
-	$(MAKE) -C "Lab 2/Lab2_LaTeX_source" $@
+LAB ?= 3
 
-.PHONY: all ver limpiar
+all pdf ver limpiar:
+	$(MAKE) -C "Lab $(LAB)/Lab$(LAB)_LaTeX_source" $@
+
+.PHONY: all pdf ver limpiar
