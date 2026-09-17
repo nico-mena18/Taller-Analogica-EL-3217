@@ -21,6 +21,7 @@
 \captionsetup[figure]{name=Figure}
 \captionsetup[table]{name=Table}
 \usepackage{float}
+\usepackage[normalem]{ulem}
 
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
 
@@ -134,7 +135,7 @@ Because of the sensitivity to a small input change, the output of a comparator m
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.55\textwidth]{figs/grid.png}
+\includegraphics[width=0.8\textwidth]{figs/DS0002}
 \caption{Plot 22-1 --- Comparator waveform.}
 \label{plot:22-1}
 \end{figure}
@@ -142,23 +143,23 @@ Because of the sensitivity to a small input change, the output of a comparator m
 \begin{enumerate}[resume, label=\arabic*.]
     \item Observe the output as you vary the potentiometer. Then reset $V_{REF}$ to $0\,\text{V}$.
 
-    Observations: \blank{10cm}.
+    Observations: \uline{Se observa una señal cuadrada que cambia su valor (de alto a bajo) y el ancho de pulso aumenta al variar el potenciómetro.}
 
     \item In this step, you will plot the transfer curve for the comparator on the oscilloscope. Place $V_{in}$ on the X-channel and $V_{out}$ on the Y-channel. Set the \textit{VOLTS/DIV} control so that both signals are on the screen. Neither channel should be inverted. Then switch the oscilloscope to the X-Y mode. Sketch (and label) the transfer curve you see in Plot 22-2.
 \end{enumerate}
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{0.48\textwidth}
+\begin{minipage}{0.6\textwidth}
 \centering
-\includegraphics[width=\textwidth]{figs/grid.png}
+\includegraphics[width=\textwidth]{figs/DS0003}
 \caption{Plot 22-2 --- Comparator transfer curve.}
 \label{plot:22-2}
 \end{minipage}
 \hfill
-\begin{minipage}{0.48\textwidth}
+\begin{minipage}{0.6\textwidth}
 \centering
-\includegraphics[width=\textwidth]{figs/grid.png}
+\includegraphics[width=\textwidth]{figs/DS0004}
 \caption{Plot 22-3 --- Comparator transfer curve (inputs reversed).}
 \label{plot:22-3}
 \end{minipage}
@@ -167,9 +168,8 @@ Because of the sensitivity to a small input change, the output of a comparator m
 \begin{enumerate}[resume, label=\arabic*.]
     \item Vary the potentiometer as you observe the transfer curve.
 
-    Observations: \blank{10cm}
+    Observations: \uline{Se observa como la curva de transferencia se satura postivamente al variar el potenciómetro. En la señal de la curva inversa se observa como se satura al aumentar el voltaje de referencia.}
 
-    \blank{16cm}
 
     \item While observing the transfer curve, reverse the inputs to the comparator. Sketch the new transfer curve in Plot 22-3.
 \end{enumerate}
@@ -189,7 +189,7 @@ Because of the sensitivity to a small input change, the output of a comparator m
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.55\textwidth]{figs/grid.png}
+\includegraphics[width=0.8\textwidth]{figs/DS0005}
 \caption{Plot 22-4 --- Schmitt trigger waveform.}
 \label{plot:22-4}
 \end{figure}
@@ -201,14 +201,13 @@ Because of the sensitivity to a small input change, the output of a comparator m
 
     \item While observing the transfer curve, vary the potentiometer.
 
-    Observations: \blank{10cm}
+    Observations: \uline{En la curva de transferencia de este circuito se observa una "caja", ya que el circuito posee histéresis, ya que es un circuito retroalimentado.}
 
-    \blank{16cm}
 \end{enumerate}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.55\textwidth]{figs/grid.png}
+\includegraphics[width=0.8\textwidth]{figs/DS0006}
 \caption{Plot 22-5 --- Schmitt trigger transfer curve.}
 \label{plot:22-5}
 \end{figure}
@@ -263,5 +262,21 @@ The Schmitt trigger you investigated in the experiment can be modified slightly 
 \caption{Relaxation oscillator based on the Schmitt trigger}
 \label{fig:22-4}
 \end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figs/DS0007}
+	\caption{Plot 22-6 --- Schmitt trigger waveform as an oscillator.}
+	\label{plot:22-6}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figs/DS0008}
+	\caption{Plot 22-6 --- Schmitt trigger transfer curve as an oscillator.}
+	\label{plot:22-7}
+\end{figure}
+
+Observatios: \uline{Se puede obtener una onda senoidal cuando se ajusta la resistencia a $0\,\omega$ o muy baja, con eso el slew rate se lleva al límite y no se pueden generar los cambios bruscos de una onda cuadrada y con eso se convierte en un filtro pasa-bajas. Por otro lado, en la curva de transferencia se observa una línea diagonal ya que el voltaje de entrada y el de referencia son exactamente iguales}
 
 \end{document}
