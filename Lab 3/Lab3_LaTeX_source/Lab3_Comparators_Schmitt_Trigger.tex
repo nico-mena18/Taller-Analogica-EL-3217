@@ -168,6 +168,7 @@ Because of the sensitivity to a small input change, the output of a comparator m
 \begin{enumerate}[resume, label=\arabic*.]
     \item Vary the potentiometer as you observe the transfer curve.
 
+
     Observations: \uline{Se observa como la curva de transferencia se satura postivamente al variar el potenciómetro. En la señal de la curva inversa se observa como se satura al aumentar el voltaje de referencia.}
 
 
@@ -239,23 +240,45 @@ La diferencia práctica entre los dos circuitos está en lo que pasa cerca del u
 \section*{Evaluation and Review Questions}
 
 \begin{enumerate}[label=\arabic*.]
-    \item Describe how the threshold voltage changes the transfer curve for a comparator.
-
-    \vspace{2.5cm}
+    \item Describe how the threshold voltage changes the transfer curve for a comparator.\\
+	A medida que se modifica el voltaje de umbral del comparador la curva de transferencia modifica el punto de conmutación del comparador. Haciendo que la forma de onda se desplace de manera horizontal. 
+    \vspace{0.25cm}
+    
 
     \item Assume the circuit in Figure~\ref{fig:22-2} had $V_{REF}$ set to zero volts. How would you expect the output to be affected by varying the dc offset control on the generator?
+    
+    \vspace{0.5cm}
+    Con $V_{ref} = 0\text{ V}$ el comparador conmuta cada vez que la señal de entrada cruza por $0 \text{V}$. Variar el offset de CD desplaza la señal verticalmente, por lo que los cruces por cero se desplazan a nivel temporal. Si la variación del offset no es mucha entonces solo afecta el ciclo de trabajo que se observa a la salida. En el caso que $V_{offset}$ sea mayor a $V_{p}$ entonces la tensión de salida sería constante con un valor de $V_{sat}$, ya que no existiría cruce por $0$.
 
-    \vspace{2.5cm}
+    
 
-    \item Would a sinusoidal input to the comparators produce the same transfer curve as a triangle waveform? Explain.
+    \item Would a sinusoidal input to the comparators produce the same transfer curve as a triangle waveform? Explain.\\
+    
+    Sí, ya que la función de transferencia es la salida $V_{out}$ en función de $V_{in}$, sin considerar la variable temporal. Si una onda triangular y otra sinusoidal, y tienen la misma amplitud, entonces veríamos la misma función de transferencia.
 
-    \vspace{2.5cm}
+    \vspace{0.5cm}
 
-    \item Summarize the important differences between a comparator and Schmitt trigger.
-
-    \vspace{2.5cm}
+    \item Summarize the important differences between a comparator and Schmitt trigger.\\
+	El comparador disparador de Schmitt posee retroalimentación negativa lo que permite comparar valores específicos positivos y negativos, llamados puntos de disparo, que permiten comparar la señal en rangos positivos y negativos. Esto es de gran utilidad ante pequeñas variaciones como el ruido eléctrico en donde se quiere comparar una señal que posee oscilaciones y evitar de esta forma conmutaciones erróneas. En el caso del comparador normal, este compara un valor fijo por lo que es propenso a realizar conmutaciones erróneas ante pequeñas oscilaciones.
+	
+	
+    \vspace{0.5cm}
 
     \item Assume the input signal in Figure~\ref{fig:22-3} could have as much as $100\,\text{m}V_{pp}$ noise. To avoid multiple tripping due to noise, you need to set the trip points at least $100\,\text{mV}$ apart. What is the minimum value of resistance that the potentiometer can be set? Assume the output saturates at $\pm 13\,\text{V}$.
+    
+    Ya que el ruido es de $100\, mV_{pp}$ entonces los puntos de disparo deben ser $\pm 50\, mVp$.
+    Si se siguen las ecuaciones de los puntos de disparo:
+    \begin{equation}
+    	V_{trigger} = \frac{R_i}{R_i + R_f} (\pm V_{sat})
+    \end{equation}
+    
+    \begin{align*}
+    	500\text{ mV} = \frac{R_i}{R_i + 100\text{ k}\Omega}(15\text{ V})
+    \end{align*}
+    Se obtiene que la resistencia mínima del potenciómetro debe ser:
+    $R_i \approx 386 \Omega$
+    
+    
 
     \vspace{2.5cm}
 \end{enumerate}
@@ -289,6 +312,6 @@ The Schmitt trigger you investigated in the experiment can be modified slightly 
 	\label{plot:22-7}
 \end{figure}
 
-Observatios: \uline{Se puede obtener una onda senoidal cuando se ajusta la resistencia a $0\,\omega$ o muy baja, con eso el slew rate se lleva al límite y no se pueden generar los cambios bruscos de una onda cuadrada y con eso se convierte en un filtro pasa-bajas. Por otro lado, en la curva de transferencia se observa una línea diagonal ya que el voltaje de entrada y el de referencia son exactamente iguales}
+Observatios: \uline{Se puede obtener una onda senoidal cuando se ajusta la resistencia a $0\,\Omega$ o muy baja, con eso el slew rate se lleva al límite y no se pueden generar los cambios bruscos de una onda cuadrada y con eso se convierte en un filtro pasa-bajas. Por otro lado, en la curva de transferencia se observa una línea diagonal ya que el voltaje de entrada y el de referencia son exactamente iguales}
 
 \end{document}
