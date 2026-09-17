@@ -1,0 +1,61 @@
+* Generador analogico de PWM - Proyecto 1, EL3217
+* Topologia: triangular (integrador + comparador Schmitt) + comparador de
+* salida dentro del lazo de realimentacion del amplificador de error.
+* Basada en TI SLAU508 / SBOA212, reescalada a las specs del enunciado:
+*   Vin: sinusoidal +-2V, 100Hz
+*   Vtri: 2.1Vp (dentro del rango 2.1-2.5Vp pedido), 5kHz
+*   Vpwm: 0V a 5V, 5kHz, duty ciclo inversamente proporcional a Vin
+* Fuente unica de 5V, offset de referencia Vref=2.5V.
+*
+* U1A/U1B y U2A/U2B son modelos de opamp/comparador ideales con salida
+* enclavada a los rieles (ver subcircuitos abajo), solo para verificar la
+* topologia y los valores calculados. Para la entrega final sustituir en
+* Multisim por los IC reales sugeridos:
+*   U1 (error amp + integrador triangular): OPA2365 (dual, FET input)
+*   U2 (comparador salida + comparador Schmitt): TLV3502 (dual, push-pull)
+*   Vref: REF3325 (2.5V) o divisor Vcc/2 seguido de buffer de opamp
+
+.SUBCKT IDEAL_OPAMP INP INN OUT VCC VEE
+Eout OUT_INT 0 INP INN 1E5
+Rout OUT_INT OUT 10
+Dh OUT VCC DCLAMP
+Dl VEE OUT DCLAMP
+.ENDS IDEAL_OPAMP
+
+.SUBCKT IDEAL_COMP INP INN OUT VCC VEE
+Eout OUT_INT 0 INP INN 1E6
+Rout OUT_INT OUT 10
+Dh OUT VCC DCLAMP
+Dl VEE OUT DCLAMP
+.ENDS IDEAL_COMP
+
+.MODEL DCLAMP D(IS=1N N=0.01 RS=0.1)
+
+* --- Fuentes ---
+V_VCC vcc 0 DC 5
+V_VREF vref 0 DC 2.5
+V_VIN vin 0 SIN(0 2 100)
+
+* --- Amplificador de error (U1A) ---
+R3 vin n1 10k
+R4 vpwm n1 10k
+C1 vpwm n1 22n
+R1 vref n2 10k
+R2 n2 0 10k
+C2 n2 0 100n
+X_U1A n2 n1 verr vcc 0 IDEAL_OPAMP
+
+* --- Comparador de salida (U2A) ---
+X_U2A verr vtri vpwm vcc 0 IDEAL_COMP
+
+* --- Generador de onda triangular ---
+R6 vtri nb 10k
+R5 v1 nb 8.45k
+X_U2B nb vref v1 vcc 0 IDEAL_COMP
+R7 v1 n3 59.0k
+C3 vtri n3 1n
+X_U1B vref n3 vtri vcc 0 IDEAL_OPAMP
+
+.TRAN 1u 20m
+.PROBE V(vin) V(vtri) V(vpwm)
+.END

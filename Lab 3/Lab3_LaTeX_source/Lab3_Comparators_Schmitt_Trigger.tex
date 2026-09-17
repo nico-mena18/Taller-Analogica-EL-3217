@@ -21,6 +21,7 @@
 \captionsetup[figure]{name=Figure}
 \captionsetup[table]{name=Table}
 \usepackage{float}
+\usepackage[normalem]{ulem}
 
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
 
@@ -134,7 +135,7 @@ Because of the sensitivity to a small input change, the output of a comparator m
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.55\textwidth]{figs/grid.png}
+\includegraphics[width=0.8\textwidth]{figs/DS0002}
 \caption{Plot 22-1 --- Comparator waveform.}
 \label{plot:22-1}
 \end{figure}
@@ -142,23 +143,23 @@ Because of the sensitivity to a small input change, the output of a comparator m
 \begin{enumerate}[resume, label=\arabic*.]
     \item Observe the output as you vary the potentiometer. Then reset $V_{REF}$ to $0\,\text{V}$.
 
-    Observations: \blank{10cm}.
+    Observations: \uline{Se observa una señal cuadrada que cambia su valor (de alto a bajo) y el ancho de pulso aumenta al variar el potenciómetro.}
 
     \item In this step, you will plot the transfer curve for the comparator on the oscilloscope. Place $V_{in}$ on the X-channel and $V_{out}$ on the Y-channel. Set the \textit{VOLTS/DIV} control so that both signals are on the screen. Neither channel should be inverted. Then switch the oscilloscope to the X-Y mode. Sketch (and label) the transfer curve you see in Plot 22-2.
 \end{enumerate}
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{0.48\textwidth}
+\begin{minipage}{0.6\textwidth}
 \centering
-\includegraphics[width=\textwidth]{figs/grid.png}
+\includegraphics[width=\textwidth]{figs/DS0003}
 \caption{Plot 22-2 --- Comparator transfer curve.}
 \label{plot:22-2}
 \end{minipage}
 \hfill
-\begin{minipage}{0.48\textwidth}
+\begin{minipage}{0.6\textwidth}
 \centering
-\includegraphics[width=\textwidth]{figs/grid.png}
+\includegraphics[width=\textwidth]{figs/DS0004}
 \caption{Plot 22-3 --- Comparator transfer curve (inputs reversed).}
 \label{plot:22-3}
 \end{minipage}
@@ -167,9 +168,8 @@ Because of the sensitivity to a small input change, the output of a comparator m
 \begin{enumerate}[resume, label=\arabic*.]
     \item Vary the potentiometer as you observe the transfer curve.
 
-    Observations: \blank{10cm}
+    Observations: \uline{Se observa como la curva de transferencia se satura postivamente al variar el potenciómetro. En la señal de la curva inversa se observa como se satura al aumentar el voltaje de referencia.}
 
-    \blank{16cm}
 
     \item While observing the transfer curve, reverse the inputs to the comparator. Sketch the new transfer curve in Plot 22-3.
 \end{enumerate}
@@ -189,7 +189,7 @@ Because of the sensitivity to a small input change, the output of a comparator m
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.55\textwidth]{figs/grid.png}
+\includegraphics[width=0.8\textwidth]{figs/DS0005}
 \caption{Plot 22-4 --- Schmitt trigger waveform.}
 \label{plot:22-4}
 \end{figure}
@@ -201,14 +201,13 @@ Because of the sensitivity to a small input change, the output of a comparator m
 
     \item While observing the transfer curve, vary the potentiometer.
 
-    Observations: \blank{10cm}
+    Observations: \uline{En la curva de transferencia de este circuito se observa una "caja", ya que el circuito posee histéresis, ya que es un circuito retroalimentado.}
 
-    \blank{16cm}
 \end{enumerate}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.55\textwidth]{figs/grid.png}
+\includegraphics[width=0.8\textwidth]{figs/DS0006}
 \caption{Plot 22-5 --- Schmitt trigger transfer curve.}
 \label{plot:22-5}
 \end{figure}
@@ -218,6 +217,18 @@ Because of the sensitivity to a small input change, the output of a comparator m
 % CONCLUSION
 % =====================================================
 \section*{Conclusion}
+
+Con el comparador de la Figura~\ref{fig:22-2} se vio que la salida del 741C solo tiene dos estados útiles y que el paso de uno al otro ocurre justo cuando $V_{in}$ cruza a $V_{REF}$. Como la triangular entra por el pin 3, la salida se va a saturación positiva mientras $V_{in} > V_{REF}$, entonces el circuito se comporta como un comparador no inversor aunque el enunciado lo llame inversor. En modo X-Y eso aparece como un escalón vertical, y al mover el potenciómetro ese escalón se corre a lo largo del eje de $V_{in}$ sin cambiar de forma. Con el umbral cerca de $+1.4\,\text{V}$ la salida pasó casi todo el ciclo en negativo y solo subía en los picos de la triangular, y con el umbral cerca de $-1.2\,\text{V}$ pasó lo contrario. O sea, el comparador convierte la triangular en una cuadrada cuyo ciclo de trabajo se controla con $V_{REF}$.
+
+La saturación del 741C tampoco salió simétrica. En las capturas el nivel alto quedó alrededor de $+10.5\,\text{V}$ y el bajo alrededor de $-14.7\,\text{V}$, por eso no conviene asumir los $\pm 13\,\text{V}$ del libro sin medirlos antes.
+
+En el Schmitt trigger de la Figura~\ref{fig:22-3} la realimentación positiva a través de $R_1$ y el potenciómetro separa el umbral de subida del de bajada, con
+\[
+V_{UT} = V_{sat+}\,\frac{R_{pot}}{R_{pot}+R_1}, \qquad V_{LT} = V_{sat-}\,\frac{R_{pot}}{R_{pot}+R_1}
+\]
+Con el potenciómetro al máximo la salida bajó cuando la entrada subía por $+0.95\,\text{V}$ y volvió a subir cuando la entrada bajaba por $-1.4\,\text{V}$, bastante cerca de lo que da la ecuación con los niveles de saturación medidos ($+0.95\,\text{V}$ y $-1.34\,\text{V}$). Los umbrales quedaron asimétricos por la misma razón que la salida. En X-Y la curva se abre en un lazo rectangular, más ancho con el potenciómetro al máximo, y al bajar la resistencia se va cerrando hasta desaparecer, punto en el que el circuito queda como un comparador simple con umbral en $0\,\text{V}$. Eso sí, $V_{LT}$ quedó muy cerca del mínimo de la triangular, y con una señal un poco más pequeña la salida se habría quedado trabada en saturación negativa.
+
+La diferencia práctica entre los dos circuitos está en lo que pasa cerca del umbral. El comparador simple cambia de estado con cualquier variación alrededor de $V_{REF}$, mientras que el Schmitt trigger necesita que la entrada recorra todo el ancho de la histéresis antes de volver a cambiar, y eso lo hace inmune a cualquier ruido más pequeño que esa ventana, que en este montaje era de unos $2.3\,\text{V}$.
 
 \vspace{9cm}
 
@@ -263,5 +274,21 @@ The Schmitt trigger you investigated in the experiment can be modified slightly 
 \caption{Relaxation oscillator based on the Schmitt trigger}
 \label{fig:22-4}
 \end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figs/DS0007}
+	\caption{Plot 22-6 --- Schmitt trigger waveform as an oscillator.}
+	\label{plot:22-6}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figs/DS0008}
+	\caption{Plot 22-6 --- Schmitt trigger transfer curve as an oscillator.}
+	\label{plot:22-7}
+\end{figure}
+
+Observatios: \uline{Se puede obtener una onda senoidal cuando se ajusta la resistencia a $0\,\omega$ o muy baja, con eso el slew rate se lleva al límite y no se pueden generar los cambios bruscos de una onda cuadrada y con eso se convierte en un filtro pasa-bajas. Por otro lado, en la curva de transferencia se observa una línea diagonal ya que el voltaje de entrada y el de referencia son exactamente iguales}
 
 \end{document}
